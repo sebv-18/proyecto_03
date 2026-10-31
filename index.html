@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es" class="is-cover">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<title>Colico Restobar · Carta digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== PORTADA EDITORIAL ===== -->
+<section class="cover" id="cover" aria-label="Portada">
+  <div class="cover-photo" id="coverPhoto" aria-hidden="true"></div>
+  <img class="ghost" data-logo alt="" aria-hidden="true">
+  <div class="cover-in">
+    <div class="mast">
+      <span class="mast-l"><img class="seal" data-logo alt="Colico Restobar" width="40" height="40"><span>Carta digital</span></span>
+      <span id="place"></span>
+    </div>
+
+    <div class="cover-main">
+      <h1 id="hName"></h1>
+      <p class="deck" id="hTag"></p>
+    </div>
+
+    <ul class="cidx" id="cidx" aria-label="Secciones de la carta"></ul>
+
+    <div class="cover-foot">
+      <button class="enter" onclick="openMenu()">
+        <span>Explorar la carta</span>
+        <svg viewBox="0 0 48 12" aria-hidden="true"><path d="M0 6h46M41 1l5 5-5 5"/></svg>
+      </button>
+      <div class="facts" id="hChips"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CARTA ===== -->
+<div class="app" id="app" inert>
+  <div class="nav">
+    <div class="nav-in">
+      <button class="navlogo" onclick="showCover()" aria-label="Volver a la portada"><img data-logo alt="" width="36" height="36"></button>
+      <nav class="tabs" id="tabs" aria-label="Categorías de la carta"></nav>
+      <button class="cartbtn empty" id="cartBtn" onclick="openSheet(true)" aria-label="Ver mi pedido">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="cn" id="barN">0</span>
+        <span class="ct" id="barT">$0</span>
+      </button>
+    </div>
+  </div>
+
+  <main id="menu"></main>
+  <footer class="foot" id="where"></footer>
+</div>
+
+<!-- ===== PEDIDO ===== -->
+<div class="scrim" id="scrim" onclick="openSheet(false)"></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" aria-hidden="true">
+  <div class="grab"></div>
+  <div class="sheet-head">
+    <h2 id="sheetTitle">Tu pedido</h2>
+    <button class="x" onclick="openSheet(false)" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="lines" id="lines"></div>
+  <div class="form">
+    <h3>Tus datos</h3>
+    <div class="seg">
+      <label><input type="radio" name="tipo" value="retiro" checked onchange="toggleAddr()"><span>Retiro en local</span></label>
+      <label><input type="radio" name="tipo" value="domicilio" onchange="toggleAddr()"><span>A domicilio</span></label>
+    </div>
+    <label class="fld">Tu nombre<input id="fName" type="text" autocomplete="name" placeholder="Ej: María Pérez"></label>
+    <label class="fld" id="addrBox" style="display:none">Dirección de entrega<textarea id="fAddr" rows="2" autocomplete="street-address" placeholder="Calle, número y referencia"></textarea></label>
+    <label class="fld">Comentarios (opcional)<textarea id="fNote" rows="2" placeholder="Ej: chorrillana en carne de pollo, sin cebolla"></textarea></label>
+  </div>
+  <div class="total"><span>Total</span><b id="total">$0</b></div>
+  <p class="err" id="err" role="alert"></p>
+  <a class="send" id="send" href="#" target="_blank" rel="noopener" onclick="return sendOrder(this)">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5A8 8 0 0 1 8.1 18.5L4 20l1.5-4A8 8 0 1 1 20 11.5z"/><path d="M9.5 9c.3 2.5 2.5 4.5 5.5 5.5"/></svg>
+    Enviar pedido por WhatsApp
+  </a>
+  <button class="clear" onclick="clearCart()">Vaciar pedido</button>
+</section>
+
+<!-- Orden importante: logo, datos del local y productos, lógica -->
+<script src="logo.js"></script>
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
